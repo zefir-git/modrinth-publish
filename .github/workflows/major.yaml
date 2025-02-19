@@ -1,8 +1,8 @@
 name: Tag Major Version
 
 on:
-  release:
-    types: [published]
+  push:
+    tags: [v*.*.*]
 
 permissions:
   contents: write
@@ -18,7 +18,7 @@ jobs:
       - name: Get major version
         id: major-version
         run: |
-          VERSION=${{ github.event.release.tag_name }}
+          VERSION=${GITHUB_REF#refs/tags/}
           MAJOR=${VERSION%%.*}
           echo "sha=$(git rev-list -n 1 $VERSION)" >> $GITHUB_OUTPUT
           echo "major=$MAJOR" >> $GITHUB_OUTPUT
