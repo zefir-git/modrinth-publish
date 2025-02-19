@@ -49,7 +49,7 @@ jobs:
           script: |
             github.rest.git.createRef({
               ...context.repo,
-              ref: "tags/${{ steps.major-version.outputs.major }}",
+              ref: "refs/tags/${{ steps.major-version.outputs.major }}",
               sha: "${{ steps.major-version.outputs.sha }}"
             })
 
